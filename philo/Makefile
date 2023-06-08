@@ -15,7 +15,7 @@ DEP_DIR := $(OBJ_DIR)/dep
 CC := cc
 CFLAGS = -Wall -Werror -Wextra -g
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
-SANITIZE = -fsanitize=leak -fsanitize=address
+SANITIZE = -fsanitize=leak -fsanitize=address -fsanitize=undefined
 COMPILE = $(CC) $(DEPFLAGS) $(CFLAGS) -c
 
 # targets
