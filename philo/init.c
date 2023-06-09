@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 22:22:46 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/09 23:10:59 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/09 23:16:58 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_err	ft_init_philos(t_philo **philos, t_fork **forks, t_params *params)
 		philos[i]->meals_ate = 0;
 		i++;
 	}
+	return (SUCCESS);
 }
 
 t_err	ft_setup_vars(t_philo **philos, t_fork **forks, t_params *params)
@@ -85,4 +86,5 @@ t_err	ft_setup_vars(t_philo **philos, t_fork **forks, t_params *params)
 	err = ft_init_philos(philos, forks, params);
 	if (err != SUCCESS)
 		return (err);
+	return (SUCCESS);
 }
