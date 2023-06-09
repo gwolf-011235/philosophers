@@ -25,7 +25,9 @@ NAME := philo
 SRC :=	main.c \
 		time.c \
 		input.c \
-		utils.c
+		init.c \
+		utils.c \
+		error_msg.c
 
 # objects
 OBJ := $(SRC:.c=.o)
