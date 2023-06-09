@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 15:33:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/09 11:23:19 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/09 23:23:40 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 # include "return_codes.h"
 # include "time.h"
 # include "utils.h"
+# include "init.h"
 
 #endif
