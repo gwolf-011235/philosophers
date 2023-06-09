@@ -24,7 +24,8 @@ NAME := philo
 # source files
 SRC :=	main.c \
 		time.c \
-		input.c
+		input.c \
+		utils.c
 
 # objects
 OBJ := $(SRC:.c=.o)
