@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:54:07 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/09 11:51:20 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/09 21:01:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int32_t	ft_mini_atoi(const char *str)
 {
 	uint32_t	i;
-	int64_t	num;
+	int64_t		num;
 
 	i = 0;
 	num = 0;
