@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   time.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/08 17:29:38 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/09 11:23:41 by gwolf            ###   ########.fr       */
+/*   Created: 2023/06/09 11:19:37 by gwolf             #+#    #+#             */
+/*   Updated: 2023/06/09 11:24:40 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "time.h"
+#ifndef TIME_H
+# define TIME_H
 
-uint64_t	ft_timestamp_in_ms(void)
-{
-	struct timeval	tv;
-	uint64_t		ms;
+# include <sys/time.h>
+# include <stdint.h>
+# include <stddef.h>
 
-	gettimeofday(&tv, NULL);
-	ms = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
-	return (ms);
-}
+uint64_t	ft_timestamp_in_ms(void);
+
+#endif
