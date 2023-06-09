@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 11:14:45 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/09 21:17:35 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/09 22:30:49 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define MSG_NOTDIGIT "Only digits as input are allowed."
 # define MSG_OVERFLOW "Args need to be <= INT_MAX."
 # define MSG_TIME "Function gettimeofday() failed."
+# define MSG_MALLOC "Function malloc() failed."
+# define MSG_MUTEX_INIT "Initialisation of mutex failed."
 
 typedef enum e_err {
 	SUCCESS,
@@ -25,7 +27,9 @@ typedef enum e_err {
 	ERR_NUMARGS,
 	ERR_NOTDIGIT,
 	ERR_OVERFLOW,
-	ERR_TIME
+	ERR_TIME,
+	ERR_MALLOC,
+	ERR_MUTEX_INIT
 }	t_err;
 
 t_err	ft_print_usage(char *prog_name, t_err err);
