@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 11:16:49 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/09 20:46:17 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/11 08:35:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,20 @@ typedef struct s_params {
 
 typedef struct s_fork {
 	bool			in_use;
-	pthread_mutex_t	m_fork;
+	pthread_mutex_t	m_in_use;
 }	t_fork;
 
 typedef struct s_philo {
 	int32_t			id;
-	pthread_t		thread;
+	pthread_t		thread_id;
 	t_params		*params;
 	t_fork			*left_fork;
 	t_fork			*right_fork;
-	uint64_t		last_meal;
+	int64_t			last_meal;
+	pthread_mutex_t	m_last_meal;
 	int32_t			meals_ate;
-	bool			*philo_dead;
-	pthread_mutex_t	*m_philo_dead;
+	bool			stop_sim;
+	pthread_mutex_t	m_stop_sim;
 }	t_philo;
 
 #endif

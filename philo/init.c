@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 22:22:46 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/10 22:49:20 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/11 08:35:57 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_err	ft_init_philos(t_philo **philos, t_fork **forks, t_params *params)
 	err = ft_m_init_philos_last_meal(philos, params->num_philos);
 	if (err != SUCCESS)
 		return (err);
-	err = ft_m_init_philos_status(philos, params->num_philos);
+	err = ft_m_init_philos_stop_sim(philos, params->num_philos);
 	if (err != SUCCESS)
 	{
 		ft_m_destroy_philo_last_meal(philos, params->num_philos);

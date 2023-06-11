@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:11:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/10 22:47:53 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/11 08:35:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_err	ft_m_destroy_philo_status(t_philo **philos, int32_t num_philos)
 	i = 0;
 	while (i < num_philos)
 	{
-		if (pthread_mutex_destroy(&philos[i]->m_status) != 0)
+		if (pthread_mutex_destroy(&philos[i]->m_stop_sim) != 0)
 			return (ERR_MUTEX_DESTROY);
 		i++;
 	}
