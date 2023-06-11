@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/06/11 10:17:44 by gwolf             #+#    #+#              #
+#    Updated: 2023/06/11 19:12:04 by gwolf            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # text effects
 RESET := \033[0m
 BOLD := \033[1m
@@ -8,6 +20,8 @@ RED := \033[31m
 BLUE := \033[34m
 
 # directories
+SRC_DIR := src
+INC_DIR := inc
 OBJ_DIR := obj
 DEP_DIR := $(OBJ_DIR)/dep
 
@@ -15,19 +29,28 @@ DEP_DIR := $(OBJ_DIR)/dep
 CC := cc
 CFLAGS = -Wall -Werror -Wextra -g
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
+INC = -I $(INC_DIR)
 SANITIZE = -fsanitize=leak -fsanitize=address -fsanitize=undefined
-COMPILE = $(CC) $(DEPFLAGS) $(CFLAGS) -c
+COMPILE = $(CC) $(DEPFLAGS) $(CFLAGS) $(INC) -c
 
 # targets
 NAME := philo
 
 # source files
-SRC :=	main.c \
-		time.c \
-		input.c \
+SRC :=	error_msg.c \
+		get.c \
+		init_mutex.c \
 		init.c \
-		utils.c \
-		error_msg.c
+		input.c \
+		main.c \
+		monitoring.c \
+		philo_threads.c \
+		print.c \
+		routine.c \
+		set.c \
+		teardown.c \
+		utils.c
+SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 
 # objects
 OBJ := $(SRC:.c=.o)
@@ -43,7 +66,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@printf "\n$(YELLOW)$(BOLD)link binary$(RESET) [$(BLUE)philosophers$(RESET)]\n"
-	$(CC) $(OBJS) $(SANITIZE) -o $@
+	$(CC) $(SANITIZE) $(INC) $(OBJS) -o $@
 	@printf "\n$(YELLOW)$(BOLD)compilation succesful$(RESET) [$(BLUE)philosophers$(RESET)]\n"
 	@printf "$(GREEN)$(BOLD)$(NAME)$(RESET) created!$(RESET)\n\n"
 
@@ -52,7 +75,8 @@ debug: SANITIZE = -fsanitize=thread
 debug: $(NAME)
 	@echo "$(GREEN)DEBUG ready!$(RESET)"
 
-$(OBJ_DIR)/%.o: %.c $(DEP_DIR)/%.d message | $(DEP_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(DEP_DIR)/%.d message | $(DEP_DIR)
 	$(COMPILE) $< -o $@
 
 .INTERMEDIATE: message
