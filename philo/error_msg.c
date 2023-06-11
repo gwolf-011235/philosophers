@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 20:50:27 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/09 21:21:56 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/11 08:24:39 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ t_err	ft_print_err_msg(t_err err, char *prog_name)
 	[ERR_NUMARGS] = MSG_NUMARGS,
 	[ERR_NOTDIGIT] = MSG_NOTDIGIT,
 	[ERR_OVERFLOW] = MSG_OVERFLOW,
-	[ERR_TIME] = MSG_TIME
+	[ERR_ISZERO] = MSG_ISZERO,
+	[ERR_TIME] = MSG_TIME,
+	[ERR_MALLOC] = MSG_MALLOC,
+	[ERR_MUTEX_INIT] = MSG_MUTEX_INIT,
+	[ERR_MUTEX_DESTROY] = MSG_MUTEX_DESTROY
 	};
 
 	printf("😵 Error: %s\n", msg_look_up[err]);
@@ -34,5 +38,4 @@ t_err	ft_print_err_msg(t_err err, char *prog_name)
 		|| err == ERR_OVERFLOW)
 		ft_print_usage(prog_name, err);
 	return (err);
-
 }
