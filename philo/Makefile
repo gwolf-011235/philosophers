@@ -6,7 +6,7 @@
 #    By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/11 10:17:44 by gwolf             #+#    #+#              #
-#    Updated: 2023/06/11 19:12:04 by gwolf            ###   ########.fr        #
+#    Updated: 2023/06/11 21:07:20 by gwolf            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,8 @@ CC := cc
 CFLAGS = -Wall -Werror -Wextra -g
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
 INC = -I $(INC_DIR)
-SANITIZE = -fsanitize=leak -fsanitize=address -fsanitize=undefined
-COMPILE = $(CC) $(DEPFLAGS) $(CFLAGS) $(INC) -c
+SANITIZE = -fsanitize=address
+COMPILE = $(CC) $(DEPFLAGS) $(CFLAGS) $(SANITIZE) $(INC)
 
 # targets
 NAME := philo
@@ -66,7 +66,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@printf "\n$(YELLOW)$(BOLD)link binary$(RESET) [$(BLUE)philosophers$(RESET)]\n"
-	$(CC) $(SANITIZE) $(INC) $(OBJS) -o $@
+	$(COMPILE) $(OBJS) -o $@
 	@printf "\n$(YELLOW)$(BOLD)compilation succesful$(RESET) [$(BLUE)philosophers$(RESET)]\n"
 	@printf "$(GREEN)$(BOLD)$(NAME)$(RESET) created!$(RESET)\n\n"
 
@@ -77,7 +77,7 @@ debug: $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(DEP_DIR)/%.d message | $(DEP_DIR)
-	$(COMPILE) $< -o $@
+	$(COMPILE) -c $< -o $@
 
 .INTERMEDIATE: message
 message:
