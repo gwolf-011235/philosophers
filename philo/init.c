@@ -6,13 +6,15 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 22:22:46 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/09 23:16:58 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/10 22:49:20 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
+#include <string.h>
+#include "teardown.h"
 
-t_err	ft_malloc_stuff(t_philo **philos, t_fork **forks, int32_t num_philos)
+t_err	ft_malloc_arrays(t_philo **philos, t_fork **forks, int32_t num_philos)
 {
 	*philos = malloc(sizeof(t_philo) * num_philos);
 	if (!*philos)
@@ -23,38 +25,15 @@ t_err	ft_malloc_stuff(t_philo **philos, t_fork **forks, int32_t num_philos)
 		free(philos);
 		return (ERR_MALLOC);
 	}
-	return (SUCCESS);
-}
-
-t_err	ft_init_forks(t_fork **forks, int32_t num_philos)
-{
-	int32_t	i;
-	bool	init_fail;
-
-	i = 0;
-	init_fail = false;
-	while (i < num_philos)
-	{
-		forks[i]->in_use = false;
-		if (pthread_mutex_init(&forks[i]->m_fork, NULL) != 0)
-		{
-			init_fail = true;
-			break ;
-		}
-		i++;
-	}
-	if (init_fail)
-	{
-		while (--i > -1)
-			pthread_mutex_destroy(&forks[i]->m_fork);
-		return (ERR_MUTEX_INIT);
-	}
+	memset(*philos, 0, sizeof(t_philo) * num_philos);
+	memset(*forks, 0, sizeof(t_fork) * num_philos);
 	return (SUCCESS);
 }
 
 t_err	ft_init_philos(t_philo **philos, t_fork **forks, t_params *params)
 {
 	int32_t	i;
+	t_err	err;
 
 	i = 0;
 	while (i < params->num_philos)
@@ -62,16 +41,24 @@ t_err	ft_init_philos(t_philo **philos, t_fork **forks, t_params *params)
 		philos[i]->id = i + 1;
 		philos[i]->params = params;
 		philos[i]->left_fork = forks[i];
-		if (i == params->num_philos - 1)
+		if (i == (params->num_philos - 1))
 			philos[i]->right_fork = forks[0];
 		else
 			philos[i]->right_fork = forks[i + 1];
-		philos[i]->last_meal = 0;
-		philos[i]->meals_ate = 0;
 		i++;
+	}
+	err = ft_m_init_philos_last_meal(philos, params->num_philos);
+	if (err != SUCCESS)
+		return (err);
+	err = ft_m_init_philos_status(philos, params->num_philos);
+	if (err != SUCCESS)
+	{
+		ft_m_destroy_philo_last_meal(philos, params->num_philos);
+		return (err);
 	}
 	return (SUCCESS);
 }
+
 
 t_err	ft_setup_vars(t_philo **philos, t_fork **forks, t_params *params)
 {
