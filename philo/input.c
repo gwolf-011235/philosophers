@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 18:08:56 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/09 22:23:10 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/10 06:45:31 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,15 @@ t_err	ft_set_params(t_params *params, int argc, char **argv)
 	params->time_to_sleep = ft_mini_atoi(argv[4]);
 	if (argc == 6)
 		params->times_to_eat = ft_mini_atoi(argv[5]);
-	if (params->num_philos < 0 || params->time_to_die < 0
-		|| params->time_to_eat < 0 || params->time_to_sleep < 0
+	if (params->num_philos < 0
+		|| params->time_to_die < 0
+		|| params->time_to_eat < 0
+		|| params->time_to_sleep < 0
 		|| (argc == 6 && params->times_to_eat < 0))
 		return (ERR_OVERFLOW);
+	if (params->num_philos == 0
+		|| (argc == 6 && params->times_to_eat == 0))
+		return (ERR_ISZERO);
 	params->start_time = ft_timestamp_in_ms();
 	if (params->start_time == -1)
 		return (ERR_TIME);
