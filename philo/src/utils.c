@@ -6,27 +6,28 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:54:07 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/11 11:32:09 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/12 17:35:41 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int32_t	ft_mini_atoi(const char *str)
+t_err	ft_str_to_digit(const char *str, int32_t *ret)
 {
-	uint32_t	i;
-	int64_t		num;
+	uint8_t	i;
+	int64_t	num;
 
 	i = 0;
 	num = 0;
-	while (str[i])
+	while (str[i] && i < 11)
 	{
 		num = num * 10 + str[i] - '0';
 		i++;
 	}
 	if (num > INT32_MAX)
-		return (-1);
-	return ((int)num);
+		return (ERR_OVERFLOW);
+	*ret = (int32_t)num;
+	return (SUCCESS);
 }
 
 t_err	ft_isdigit(int c)

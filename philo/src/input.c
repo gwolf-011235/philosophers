@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 18:08:56 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/11 09:16:49 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/12 23:03:09 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,26 @@ t_err	ft_check_args(int argc, char **argv)
 
 t_err	ft_set_params(t_params *params, int argc, char **argv)
 {
-	params->num_philos = ft_mini_atoi(argv[1]);
-	params->time_to_die = ft_mini_atoi(argv[2]);
-	params->time_to_eat = ft_mini_atoi(argv[3]);
-	params->time_to_sleep = ft_mini_atoi(argv[4]);
+	t_err	err;
+
+	err = ft_str_to_digit(argv[1], &params->num_philos);
+	if (err != SUCCESS)
+		return (err);
+	err = ft_str_to_digit(argv[2], &params->time_to_die);
+	if (err != SUCCESS)
+		return (err);
+	err = ft_str_to_digit(argv[3], &params->time_to_eat);
+	if (err != SUCCESS)
+		return (err);
+	err = ft_str_to_digit(argv[4], &params->time_to_sleep);
+	if (err != SUCCESS)
+		return (err);
 	if (argc == 6)
-		params->times_to_eat = ft_mini_atoi(argv[5]);
-	if (params->num_philos < 0
-		|| params->time_to_die < 0
-		|| params->time_to_eat < 0
-		|| params->time_to_sleep < 0
-		|| (argc == 6 && params->times_to_eat < 0))
-		return (ERR_OVERFLOW);
+	{
+		err = ft_str_to_digit(argv[5], &params->times_to_eat);
+		if (err != SUCCESS)
+			return (err);
+	}
 	if (params->num_philos == 0
 		|| (argc == 6 && params->times_to_eat == 0))
 		return (ERR_ISZERO);
