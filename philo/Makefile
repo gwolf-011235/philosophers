@@ -6,7 +6,7 @@
 #    By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/11 10:17:44 by gwolf             #+#    #+#              #
-#    Updated: 2023/06/11 21:07:20 by gwolf            ###   ########.fr        #
+#    Updated: 2023/06/12 23:05:26 by gwolf            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,11 +27,11 @@ DEP_DIR := $(OBJ_DIR)/dep
 
 # compiling
 CC := cc
-CFLAGS = -Wall -Werror -Wextra -g
-DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
-INC = -I $(INC_DIR)
 SANITIZE = -fsanitize=address
-COMPILE = $(CC) $(DEPFLAGS) $(CFLAGS) $(SANITIZE) $(INC)
+CPPFLAGS = -I $(INC_DIR)
+CFLAGS = -Wall -Werror -Wextra -g $(SANITIZE)
+DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
+COMPILE = $(CC) $(DEPFLAGS) $(CPPFLAGS) $(CFLAGS)
 
 # targets
 NAME := philo
@@ -62,7 +62,6 @@ DEPFILES :=$(SRC:%.c=$(DEP_DIR)/%.d)
 .PHONY: all, clean, fclean, re, obj, dep
 
 all: $(NAME)
-	@echo "$(GREEN)ALL DONE!$(RESET)"
 
 $(NAME): $(OBJS)
 	@printf "\n$(YELLOW)$(BOLD)link binary$(RESET) [$(BLUE)philosophers$(RESET)]\n"
@@ -70,7 +69,6 @@ $(NAME): $(OBJS)
 	@printf "\n$(YELLOW)$(BOLD)compilation succesful$(RESET) [$(BLUE)philosophers$(RESET)]\n"
 	@printf "$(GREEN)$(BOLD)$(NAME)$(RESET) created!$(RESET)\n\n"
 
-debug: CFLAGS = -g
 debug: SANITIZE = -fsanitize=thread
 debug: $(NAME)
 	@echo "$(GREEN)DEBUG ready!$(RESET)"
