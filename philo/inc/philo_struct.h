@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 11:16:49 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/11 20:34:27 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 00:25:29 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 # include <pthread.h>
 # include <stdbool.h>
 
+typedef enum e_stage {
+	INIT,
+	POST_MALLOC,
+	POST_MUTEX_DATA,
+	POST_MUTEX_FORK,
+	POST_MUTEX_PHILO
+}	t_stage;
+
 typedef struct s_params {
 	int32_t			num_philos;
 	int32_t			time_to_die;
@@ -24,8 +32,6 @@ typedef struct s_params {
 	int32_t			time_to_sleep;
 	int32_t			times_to_eat;
 	int64_t			start_time;
-	pthread_mutex_t	m_print;
-	pthread_t		health;
 }	t_params;
 
 typedef struct s_fork {
@@ -44,6 +50,16 @@ typedef struct s_philo {
 	int32_t			meals_ate;
 	bool			stop_sim;
 	pthread_mutex_t	m_stop_sim;
+	pthread_mutex_t	*m_print;
 }	t_philo;
+
+typedef struct s_data {
+	t_philo			*philos;
+	t_fork			*forks;
+	t_stage			stage;
+	pthread_mutex_t	m_print;
+	pthread_t		check_alive;
+	pthread_t		check_full;
+}	t_data;
 
 #endif

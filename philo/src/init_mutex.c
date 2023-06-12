@@ -6,12 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:27:54 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/11 19:27:19 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/12 23:47:56 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_struct.h"
 #include "return_codes.h"
+#include "teardown.h"
 
 /**
  * @brief Init mutex m_in_use in forks array.
@@ -105,6 +106,22 @@ t_err	ft_m_init_philos_stop_sim(t_philo *philos, int32_t num_philos)
 		while (--i >= 0)
 			pthread_mutex_destroy(&philos[i].m_stop_sim);
 		return (ERR_MUTEX_INIT);
+	}
+	return (SUCCESS);
+}
+
+t_err	ft_m_init_philos(t_philo *philos, int32_t num_philos)
+{
+	t_err	err;
+
+	err = ft_m_init_philos_last_meal(philos, num_philos);
+	if (err != SUCCESS)
+		return (err);
+	err = ft_m_init_philos_stop_sim(philos, num_philos);
+	if (err != SUCCESS)
+	{
+		ft_m_destroy_philo_last_meal(philos, num_philos);
+		return (err);
 	}
 	return (SUCCESS);
 }
