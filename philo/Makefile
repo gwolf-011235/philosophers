@@ -6,7 +6,7 @@
 #    By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/11 10:17:44 by gwolf             #+#    #+#              #
-#    Updated: 2023/06/12 23:05:26 by gwolf            ###   ########.fr        #
+#    Updated: 2023/06/13 01:09:56 by gwolf            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ DEP_DIR := $(OBJ_DIR)/dep
 CC := cc
 SANITIZE = -fsanitize=address
 CPPFLAGS = -I $(INC_DIR)
-CFLAGS = -Wall -Werror -Wextra -g $(SANITIZE)
+CFLAGS = -Wall -Werror -Wextra -pthread -g $(SANITIZE)
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
 COMPILE = $(CC) $(DEPFLAGS) $(CPPFLAGS) $(CFLAGS)
 
@@ -37,7 +37,8 @@ COMPILE = $(CC) $(DEPFLAGS) $(CPPFLAGS) $(CFLAGS)
 NAME := philo
 
 # source files
-SRC :=	error_msg.c \
+SRC :=	cleanup.c \
+		error_msg.c \
 		get.c \
 		init_mutex.c \
 		init.c \

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 15:33:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/11 18:42:46 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 00:33:34 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 # include "utils.h"
 # include "init.h"
 # include "philo_threads.h"
+# include "teardown.h"
 
 #endif
