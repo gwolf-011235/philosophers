@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:32:44 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 12:56:12 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 14:39:35 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ bool	ft_is_full(t_philo *philo)
 	if (ret)
 	{
 		pthread_mutex_lock(&philo->m_stop_sim);
-		philo->stop_sim = true;
+		if (philo->stop_sim == false)
+			philo->stop_sim = true;
 		pthread_mutex_unlock(&philo->m_stop_sim);
 	}
 	return (ret);
@@ -94,15 +95,22 @@ void	*ft_check_full(void *arg)
 	int32_t	i;
 
 	philos = (t_philo *)arg;
-	hungry = philos[0].params->num_philos;
-	while (hungry)
+	hungry = 0;
+	while (hungry < philos->params->num_philos)
 	{
 		i = 0;
 		while (i < philos->params->num_philos)
 		{
-			if (!ft_get_philo_stop_sim(&philos[i])
-				&& ft_is_full(&philos[i]) == true)
-				hungry--;
+			if (ft_get_philo_stop_sim(&philos[i]) == true)
+			{
+				hungry++;
+			}
+			else
+			{
+				hungry = 0;
+				if (ft_is_full(&philos[i]) == true)
+					hungry++;
+			}
 			i++;
 		}
 	}
