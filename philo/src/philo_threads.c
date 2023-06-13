@@ -12,6 +12,22 @@
 
 #include "philo_threads.h"
 
+t_err	ft_set_startup_time(t_philo *philos, t_params *params)
+{
+	int32_t	i;
+
+	params->start_time = ft_timestamp_in_ms();
+	if (params->start_time == -1)
+		return (ERR_TIME);
+	i = 0;
+	while (i < params->num_philos)
+	{
+		philos[i].last_meal = ft_timestamp_in_ms();
+		i++;
+	}
+	return (SUCCESS);
+}
+
 t_err	ft_monitoring_threads(t_data *data, t_philo *philos, t_params *params)
 {
 	if (params->num_philos > 1
@@ -34,9 +50,7 @@ t_err	ft_spin_threads(t_data *data, t_philo *philos, t_params *params)
 {
 	int32_t		i;
 
-	params->start_time = ft_timestamp_in_ms();
-	if (params->start_time == -1)
-		return (ERR_TIME);
+	ft_set_startup_time(philos, params);
 	i = 0;
 	while (i < params->num_philos)
 	{

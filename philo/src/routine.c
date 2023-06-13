@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:32:19 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 10:30:53 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 13:04:21 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ void	*ft_philo_life(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	philo->last_meal = ft_timestamp_in_ms();
 	while (1)
 	{
 		if (ft_eat(philo) != SUCCESS)
