@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 11:16:49 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 00:25:29 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 10:59:49 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_philo {
 	int64_t			last_meal;
 	pthread_mutex_t	m_last_meal;
 	int32_t			meals_ate;
+	pthread_mutex_t	m_meals_ate;
 	bool			stop_sim;
 	pthread_mutex_t	m_stop_sim;
 	pthread_mutex_t	*m_print;
@@ -60,6 +61,7 @@ typedef struct s_data {
 	pthread_mutex_t	m_print;
 	pthread_t		check_alive;
 	pthread_t		check_full;
+	bool			meals;
 }	t_data;
 
 #endif

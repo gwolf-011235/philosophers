@@ -6,11 +6,28 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:11:08 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 09:49:27 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 11:10:58 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_threads.h"
+
+t_err	ft_monitoring_threads(t_data *data, t_philo *philos, t_params *params)
+{
+	if (pthread_create(&data->check_alive, NULL, ft_check_health, philos) != 0)
+	{
+		printf("⚠️  Could not create check_health thread\n");
+		return (ft_stop_and_join(data, ERR_THREAD_CREATE, params->num_philos));
+	}
+	if (data->meals
+		&& pthread_create(&data->check_full, NULL, ft_check_full, philos) != 0)
+	{
+		printf("⚠️  Could not create check_full thread\n");
+		pthread_join(data->check_alive, NULL);
+		return (ft_stop_and_join(data, ERR_THREAD_CREATE, params->num_philos));
+	}
+	return (SUCCESS);
+}
 
 t_err	ft_spin_threads(t_data *data, t_philo *philos, t_params *params)
 {
@@ -30,11 +47,8 @@ t_err	ft_spin_threads(t_data *data, t_philo *philos, t_params *params)
 		}
 		i++;
 	}
-	if (pthread_create(&data->check_alive, NULL, ft_check_health, philos) != 0)
-	{
-		printf("⚠️  Could not create check_health thread\n");
-		return (ft_stop_and_join(data, ERR_THREAD_CREATE, i));
-	}
+	if (ft_monitoring_threads(data, philos, params) != SUCCESS)
+		return (ERR_THREAD_CREATE);
 	return (SUCCESS);
 }
 
@@ -49,6 +63,8 @@ t_err	ft_join_threads(t_data *data, t_philo *philos, t_params *params)
 		i++;
 	}
 	pthread_join(data->check_alive, NULL);
+	if (data->meals)
+		pthread_join(data->check_full, NULL);
 	return (SUCCESS);
 }
 

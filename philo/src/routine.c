@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:32:19 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/11 20:48:23 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 10:30:53 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_err	ft_eat(t_philo *philo)
 	ft_update_philo_last_meal(philo);
 	ft_print(philo, EAT);
 	ft_wrapper_usleep(philo->params->time_to_eat);
+	ft_update_philo_meals_ate(philo);
 	ft_drop_forks(philo);
 	return (SUCCESS);
 }

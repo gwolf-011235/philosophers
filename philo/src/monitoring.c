@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:32:44 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 08:23:17 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 10:38:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,24 @@ bool	ft_is_dead(t_philo *philo)
 	return (ret);
 }
 
+bool	ft_is_full(t_philo *philo)
+{
+	bool	ret;
+
+	ret = false;
+	pthread_mutex_lock(&philo->m_meals_ate);
+	if (philo->meals_ate >= philo->params->times_to_eat)
+		ret = true;
+	pthread_mutex_unlock(&philo->m_meals_ate);
+	if (ret)
+	{
+		pthread_mutex_lock(&philo->m_stop_sim);
+		philo->stop_sim = true;
+		pthread_mutex_unlock(&philo->m_stop_sim);
+	}
+	return (ret);
+}
+
 void	*ft_check_health(void *arg)
 {
 	int32_t	i;
@@ -62,6 +80,28 @@ void	*ft_check_health(void *arg)
 		{
 			if (ft_is_dead(&philos[i]) == true)
 				all_well = false;
+			i++;
+		}
+	}
+	ft_stop_all(philos);
+	return (NULL);
+}
+
+void	*ft_check_full(void *arg)
+{
+	int32_t	i;
+	bool	hungry;
+	t_philo	*philos;
+
+	hungry = true;
+	philos = (t_philo *)arg;
+	while (hungry)
+	{
+		i = 0;
+		while (i < philos->params->num_philos)
+		{
+			if (ft_is_full(&philos[i]) == true)
+				hungry = false;
 			i++;
 		}
 	}

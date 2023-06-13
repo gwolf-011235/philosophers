@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:45:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/11 10:48:05 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 10:29:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,13 @@ t_err	ft_update_philo_last_meal(t_philo *philo)
 	pthread_mutex_lock(&philo->m_last_meal);
 	philo->last_meal = ft_timestamp_in_ms();
 	pthread_mutex_unlock(&philo->m_last_meal);
+	return (SUCCESS);
+}
+
+t_err	ft_update_philo_meals_ate(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->m_meals_ate);
+	philo->meals_ate++;
+	pthread_mutex_unlock(&philo->m_meals_ate);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 11:20:55 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/11 09:18:51 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 10:59:59 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 # include "utils.h"
 
 t_err	ft_check_args(int argc, char **argv);
-t_err	ft_set_params(t_params *params, int argc, char **argv);
+t_err	ft_set_params(t_params *params, int argc, char **argv, bool *meals);
 
 #endif
