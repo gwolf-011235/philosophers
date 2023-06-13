@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 11:14:45 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 00:31:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 08:27:25 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define MSG_MALLOC "Function malloc() failed."
 # define MSG_MUTEX_INIT "Initialisation of mutex failed."
 # define MSG_MUTEX_DESTROY "Destruction of mutex failed."
+# define MSG_THREAD_CREATE "pthread_create() failed."
 # define MSG_PANIC "PANIC! Something went wrong during cleanup!"
 
 typedef enum e_err {
@@ -39,6 +40,7 @@ typedef enum e_err {
 	ERR_MALLOC,
 	ERR_MUTEX_INIT,
 	ERR_MUTEX_DESTROY,
+	ERR_THREAD_CREATE,
 	PANIC
 }	t_err;
 

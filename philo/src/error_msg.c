@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 20:50:27 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 00:30:45 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 08:44:23 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_err	ft_print_err_msg(t_err err)
 	[ERR_MALLOC] = MSG_MALLOC,
 	[ERR_MUTEX_INIT] = MSG_MUTEX_INIT,
 	[ERR_MUTEX_DESTROY] = MSG_MUTEX_DESTROY,
+	[ERR_THREAD_CREATE] = MSG_THREAD_CREATE,
 	[PANIC] = MSG_PANIC
 	};
 

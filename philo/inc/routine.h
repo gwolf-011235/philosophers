@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:33:01 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/11 20:38:33 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 08:34:56 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_err	ft_set_philo_stop_sim(t_philo *philo);
 t_err	ft_update_philo_last_meal(t_philo *philo);
 
 //monitoring.c
+t_err	ft_stop_all(t_philo *philos);
 bool	ft_is_dead(t_philo *philo);
 void	*ft_check_health(void *arg);
 
