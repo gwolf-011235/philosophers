@@ -6,11 +6,24 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:32:44 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/11 20:38:46 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 08:23:17 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "routine.h"
+
+t_err	ft_stop_all(t_philo *philos)
+{
+	int32_t	i;
+
+	i = 0;
+	while (i < philos->params->num_philos)
+	{
+		ft_set_philo_stop_sim(&philos[i]);
+		i++;
+	}
+	return (SUCCESS);
+}
 
 bool	ft_is_dead(t_philo *philo)
 {
@@ -52,11 +65,6 @@ void	*ft_check_health(void *arg)
 			i++;
 		}
 	}
-	i = 0;
-	while (i < philos->params->num_philos)
-	{
-		ft_set_philo_stop_sim(&philos[i]);
-		i++;
-	}
+	ft_stop_all(philos);
 	return (NULL);
 }
