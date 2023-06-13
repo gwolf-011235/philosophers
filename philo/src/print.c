@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:52:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/12 23:51:34 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 09:54:24 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void	ft_print(t_philo *philo, t_msg index)
 
 	pthread_mutex_lock(philo->m_print);
 	curr_timestamp = ft_timestamp_in_ms() - philo->params->start_time;
-	printf("%ld %d %s\n", curr_timestamp, philo->id, msg[index]);
+	printf("%ld\t%d\t%s\n", curr_timestamp, philo->id, msg[index]);
 	pthread_mutex_unlock(philo->m_print);
 }
