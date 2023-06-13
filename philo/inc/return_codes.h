@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 11:14:45 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 08:27:25 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 10:11:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdio.h>
 
-# define MSG_SUCCESS "All cleaned up. Goodbye!"
+# define MSG_SUCCESS "👋 Goodbye! "
 # define MSG_UNDEFINED "Something went wrong."
 # define MSG_NUMARGS "Wrong number of arguments."
 # define MSG_NOTDIGIT "Only digits as input are allowed."

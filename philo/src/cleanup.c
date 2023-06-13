@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 00:29:45 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 08:54:19 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 10:12:38 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ t_err	ft_cleanup(t_data *data, t_err err, int32_t num_philos)
 		free(data->philos);
 		free(data->forks);
 	}
+	printf("🧹 All cleaned up.\n");
 	return (ft_print_err_msg(err));
 }
