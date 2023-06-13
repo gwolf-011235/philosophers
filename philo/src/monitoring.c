@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:32:44 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 12:29:11 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 12:56:12 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,22 +89,22 @@ void	*ft_check_life(void *arg)
 
 void	*ft_check_full(void *arg)
 {
-	int32_t	i;
-	bool	hungry;
 	t_philo	*philos;
+	int32_t	hungry;
+	int32_t	i;
 
-	hungry = true;
 	philos = (t_philo *)arg;
+	hungry = philos[0].params->num_philos;
 	while (hungry)
 	{
 		i = 0;
 		while (i < philos->params->num_philos)
 		{
-			if (ft_is_full(&philos[i]) == true)
-				hungry = false;
+			if (!ft_get_philo_stop_sim(&philos[i])
+				&& ft_is_full(&philos[i]) == true)
+				hungry--;
 			i++;
 		}
 	}
-	ft_stop_all(philos);
 	return (NULL);
 }
