@@ -6,7 +6,7 @@
 #    By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/11 10:17:44 by gwolf             #+#    #+#              #
-#    Updated: 2023/06/13 01:09:56 by gwolf            ###   ########.fr        #
+#    Updated: 2023/06/13 09:19:18 by gwolf            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,8 @@ DEP_DIR := $(OBJ_DIR)/dep
 
 # compiling
 CC := cc
-SANITIZE = -fsanitize=address
 CPPFLAGS = -I $(INC_DIR)
-CFLAGS = -Wall -Werror -Wextra -pthread -g $(SANITIZE)
+CFLAGS = -Wall -Werror -Wextra -pthread -g
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
 COMPILE = $(CC) $(DEPFLAGS) $(CPPFLAGS) $(CFLAGS)
 
@@ -70,9 +69,13 @@ $(NAME): $(OBJS)
 	@printf "\n$(YELLOW)$(BOLD)compilation succesful$(RESET) [$(BLUE)philosophers$(RESET)]\n"
 	@printf "$(GREEN)$(BOLD)$(NAME)$(RESET) created!$(RESET)\n\n"
 
-debug: SANITIZE = -fsanitize=thread
-debug: $(NAME)
-	@echo "$(GREEN)DEBUG ready!$(RESET)"
+debug: CFLAGS += -fsanitize=address
+debug: fclean $(NAME)
+	@printf "DEBUG: Compiled with $(YELLOW)$(BOLD)fsanitize=address$(RESET)\n\n"
+
+tebug: CFLAGS += -fsanitize=thread
+tebug: fclean $(NAME)
+	@printf "DEBUG: Compiled with $(YELLOW)$(BOLD)fsanitize=thread$(RESET)\n\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(DEP_DIR)/%.d message | $(DEP_DIR)
