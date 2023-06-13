@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:33:01 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 10:40:11 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 12:29:11 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_err	ft_update_philo_meals_ate(t_philo *philo);
 t_err	ft_stop_all(t_philo *philos);
 bool	ft_is_dead(t_philo *philo);
 bool	ft_is_full(t_philo *philo);
-void	*ft_check_health(void *arg);
+void	*ft_check_life(void *arg);
 void	*ft_check_full(void *arg);
 
 //routine.c

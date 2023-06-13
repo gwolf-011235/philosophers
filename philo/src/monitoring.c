@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:32:44 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 10:38:37 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/13 12:29:11 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ bool	ft_is_full(t_philo *philo)
 	return (ret);
 }
 
-void	*ft_check_health(void *arg)
+void	*ft_check_life(void *arg)
 {
 	int32_t	i;
 	bool	all_well;
