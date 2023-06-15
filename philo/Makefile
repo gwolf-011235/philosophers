@@ -6,7 +6,7 @@
 #    By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/11 10:17:44 by gwolf             #+#    #+#              #
-#    Updated: 2023/06/15 14:07:43 by gwolf            ###   ########.fr        #
+#    Updated: 2023/06/15 17:33:20 by gwolf            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,16 +38,15 @@ NAME := philo
 # source files
 SRC :=	cleanup.c \
 		error_msg.c \
-		get.c \
 		init_mutex.c \
 		init.c \
 		input.c \
 		main.c \
-		monitoring.c \
 		philo_threads.c \
-		print.c \
 		routine.c \
-		set.c \
+		routine_forks.c \
+		routine_monitoring.c \
+		routine_utils.c \
 		teardown.c \
 		utils.c
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
