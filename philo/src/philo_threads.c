@@ -28,24 +28,6 @@ t_err	ft_set_startup_time(t_philo *philos, t_params *params)
 	return (SUCCESS);
 }
 
-t_err	ft_monitoring_threads(t_data *data, t_philo *philos, t_params *params)
-{
-	if (params->num_philos > 1
-		&& pthread_create(&data->check_life, NULL, ft_check_life, philos) != 0)
-	{
-		printf("⚠️  Could not create monitor thread check_life\n");
-		return (ft_stop_and_join(data, ERR_THREAD_CREATE, params->num_philos));
-	}
-	if (params->num_philos > 1 && data->meals
-		&& pthread_create(&data->check_full, NULL, ft_check_full, philos) != 0)
-	{
-		printf("⚠️  Could not create monitor thread check_full\n");
-		pthread_join(data->check_life, NULL);
-		return (ft_stop_and_join(data, ERR_THREAD_CREATE, params->num_philos));
-	}
-	return (SUCCESS);
-}
-
 t_err	ft_spin_threads(t_data *data, t_philo *philos, t_params *params)
 {
 	int32_t		i;
@@ -57,17 +39,16 @@ t_err	ft_spin_threads(t_data *data, t_philo *philos, t_params *params)
 		if (pthread_create(&philos[i].thread_id, NULL,
 				ft_philo_life, &philos[i]) != 0)
 		{
-			printf("⚠️  Could not create philo thread with ID %d\n", i);
+			printf("🔥 Could not create philo thread with ID %d\n", i);
 			return (ft_stop_and_join(data, ERR_THREAD_CREATE, i));
 		}
 		i++;
 	}
-	if (ft_monitoring_threads(data, philos, params) != SUCCESS)
-		return (ERR_THREAD_CREATE);
+	ft_monitoring(philos, params->num_philos, data->meals);
 	return (SUCCESS);
 }
 
-t_err	ft_join_threads(t_data *data, t_philo *philos, t_params *params)
+t_err	ft_join_threads(t_philo *philos, t_params *params)
 {
 	int32_t	i;
 
@@ -77,10 +58,6 @@ t_err	ft_join_threads(t_data *data, t_philo *philos, t_params *params)
 		pthread_join(philos[i].thread_id, NULL);
 		i++;
 	}
-	if (params->num_philos > 1)
-		pthread_join(data->check_life, NULL);
-	if (params->num_philos > 1 && data->meals)
-		pthread_join(data->check_full, NULL);
 	return (SUCCESS);
 }
 

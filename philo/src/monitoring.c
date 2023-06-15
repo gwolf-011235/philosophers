@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:32:44 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 13:01:29 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/15 16:34:48 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,65 +66,23 @@ bool	ft_is_full(t_philo *philo)
 	return (ret);
 }
 
-t_err	ft_still_alive(t_philo *philos, int32_t num_philos, bool *alive)
+t_err	ft_dead_or_full(t_philo *philos, int32_t num_philos,
+							bool *alive, bool *hungry, bool meals)
 {
-	t_status	status;
-	int32_t		i;
-
-	status = ACTIVE;
-	i = 0;
-	while (*alive && i < num_philos)
-	{
-		ft_get_philo_status(&philos[i], &status);
-		if (status == FULL_STOP)
-			return (STOP);
-		else if (status == DEAD || ft_is_dead(&philos[i]) == true)
-			*alive = false;
-		i++;
-	}
-	return (SUCCESS);
-}
-
-void	*ft_check_life(void *arg)
-{
-	t_err	err;
-	t_philo	*philos;
-	bool	alive;
-
-	philos = (t_philo *)arg;
-	alive = true;
-	while (alive)
-	{
-		err = ft_still_alive(philos, philos->params->num_philos, &alive);
-		if (err != SUCCESS)
-			break ;
-	}
-	if (err == SUCCESS)
-		ft_set_status_all(philos, DEAD);
-	return (NULL);
-}
-
-t_err	ft_still_hungry(t_philo *philos, int32_t num_philos, bool *hungry)
-{
-	t_status	status;
 	int32_t		i;
 	int32_t		philos_fed;
 
-	status = ACTIVE;
 	i = 0;
 	philos_fed = 0;
 	while (i < num_philos)
 	{
-		ft_get_philo_status(&philos[i], &status);
-		if (status == DEAD)
-			return (STOP);
-		else if (status == FULL)
-			philos_fed++;
-		else
+		if (ft_is_dead(&philos[i]) == true)
 		{
-			if (ft_is_full(&philos[i]) == true)
-				philos_fed++;
+			*alive = false;
+			break ;
 		}
+		if (meals && ft_is_full(&philos[i]) == true)
+			philos_fed++;
 		i++;
 	}
 	if (philos_fed == num_philos)
@@ -132,21 +90,23 @@ t_err	ft_still_hungry(t_philo *philos, int32_t num_philos, bool *hungry)
 	return (SUCCESS);
 }
 
-void	*ft_check_full(void *arg)
+t_err	ft_monitoring(t_philo *philos, int32_t num_philos, bool meals)
 {
 	t_err	err;
-	t_philo	*philos;
+	bool	alive;
 	bool	hungry;
 
-	philos = (t_philo *)arg;
+	alive = true;
 	hungry = true;
-	while (hungry)
+	while (alive && hungry)
 	{
-		err = ft_still_hungry(philos, philos->params->num_philos, &hungry);
+		err = ft_dead_or_full(philos, num_philos, &alive, &hungry, meals);
 		if (err != SUCCESS)
-			break ;
+			return (err);
 	}
-	if (err == SUCCESS)
+	if (!alive)
+		ft_set_status_all(philos, DEAD);
+	if (!hungry)
 		ft_set_status_all(philos, FULL_STOP);
-	return (NULL);
+	return (SUCCESS);
 }
