@@ -6,7 +6,7 @@
 #    By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/11 10:17:44 by gwolf             #+#    #+#              #
-#    Updated: 2023/06/15 12:34:36 by gwolf            ###   ########.fr        #
+#    Updated: 2023/06/15 14:07:43 by gwolf            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ DEP_DIR := $(OBJ_DIR)/dep
 # compiling
 CC := cc
 CPPFLAGS = -I $(INC_DIR)
-CFLAGS = -Wall -Werror -Wextra -pthread -O3
+CFLAGS = -Wall -Werror -Wextra -pthread -g
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
 COMPILE = $(CC) $(DEPFLAGS) $(CPPFLAGS) $(CFLAGS)
 
