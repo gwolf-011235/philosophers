@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:32:19 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 12:33:17 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/15 13:01:06 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ t_err	ft_sleep(t_philo *philo)
 	t_status	status;
 
 	status = ACTIVE;
-
 	ft_get_philo_status(philo, &status);
 	if (status >= DEAD)
 		return (STOP);
@@ -122,7 +121,6 @@ t_err	ft_think(t_philo *philo)
 	t_status	status;
 
 	status = ACTIVE;
-
 	ft_get_philo_status(philo, &status);
 	if (ft_is_dead(philo) || status >= DEAD)
 		return (STOP);

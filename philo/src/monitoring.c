@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:32:44 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 10:27:44 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/15 13:01:29 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ t_err	ft_still_alive(t_philo *philos, int32_t num_philos, bool *alive)
 		i++;
 	}
 	return (SUCCESS);
-
 }
 
 void	*ft_check_life(void *arg)

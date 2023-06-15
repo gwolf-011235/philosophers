@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 15:32:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 11:01:05 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/15 13:01:54 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,3 @@ int	main(int argc, char *argv[])
 		return (ft_cleanup(&data, err, params.num_philos));
 	ft_cleanup(&data, SUCCESS, params.num_philos);
 }
-
-
