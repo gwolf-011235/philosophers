@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 11:16:49 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 08:11:31 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/15 12:46:39 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_philo {
 	t_status		status;
 	pthread_mutex_t	m_status;
 	pthread_mutex_t	*m_print;
+	bool			*stop_sim;
 }	t_philo;
 
 typedef struct s_data {
@@ -69,6 +70,7 @@ typedef struct s_data {
 	pthread_t		check_life;
 	pthread_t		check_full;
 	bool			meals;
+	bool			stop_sim;
 }	t_data;
 
 #endif

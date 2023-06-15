@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 22:22:46 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 08:11:21 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/15 12:52:11 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_err	ft_init_philos(t_philo *philos, t_data *data, t_params *params)
 			philos[i].right_fork = &data->forks[0];
 		else
 			philos[i].right_fork = &data->forks[i + 1];
+		philos[i].stop_sim = &data->stop_sim;
 		i++;
 	}
 	return (SUCCESS);
