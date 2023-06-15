@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:32:19 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 08:29:41 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/15 12:33:17 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,17 @@ void	*ft_philo_life(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->params->num_philos == 1)
+	{
+		pthread_mutex_lock(&philo->left_fork->m_in_use);
+		philo->left_fork->in_use = true;
+		ft_print(philo, FORK);
+		ft_wrapper_usleep(philo->params->time_to_die + 1);
+		ft_is_dead(philo);
+		philo->left_fork->in_use = false;
+		pthread_mutex_unlock(&philo->left_fork->m_in_use);
+		return (NULL);
+	}
 	while (1)
 	{
 		if (ft_eat(philo) != SUCCESS)
