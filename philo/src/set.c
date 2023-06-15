@@ -6,17 +6,17 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:45:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 10:29:37 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/15 08:12:32 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "routine.h"
 
-t_err	ft_set_philo_stop_sim(t_philo *philo)
+t_err	ft_set_philo_status(t_philo *philo, t_status status)
 {
-	pthread_mutex_lock(&philo->m_stop_sim);
-	philo->stop_sim = true;
-	pthread_mutex_unlock(&philo->m_stop_sim);
+	pthread_mutex_lock(&philo->m_status);
+	philo->status = status;
+	pthread_mutex_unlock(&philo->m_status);
 	return (SUCCESS);
 }
 

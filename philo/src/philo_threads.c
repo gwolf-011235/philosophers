@@ -86,7 +86,7 @@ t_err	ft_join_threads(t_data *data, t_philo *philos, t_params *params)
 
 t_err	ft_stop_and_join(t_data *data, t_err err, int32_t num_philos)
 {
-	ft_stop_all(data->philos);
+	ft_set_status_all(data->philos, DEAD);
 	num_philos--;
 	while (num_philos >= 0)
 	{

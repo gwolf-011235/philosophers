@@ -6,20 +6,18 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:38:47 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 10:32:42 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/15 08:09:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "routine.h"
 
-bool	ft_get_philo_stop_sim(t_philo *philo)
+t_err	ft_get_philo_status(t_philo *philo, t_status *status)
 {
-	bool	ret;
-
-	pthread_mutex_lock(&philo->m_stop_sim);
-	ret = philo->stop_sim;
-	pthread_mutex_unlock(&philo->m_stop_sim);
-	return (ret);
+	pthread_mutex_lock(&philo->m_status);
+	*status = philo->status;
+	pthread_mutex_unlock(&philo->m_status);
+	return (SUCCESS);
 }
 
 int64_t	ft_get_philo_last_meal(t_philo *philo)

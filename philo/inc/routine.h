@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:33:01 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 12:29:11 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/15 08:41:25 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ typedef enum e_msg {
 void	ft_print(t_philo *philo, t_msg index);
 
 //get.c
-bool	ft_get_philo_stop_sim(t_philo *philo);
+t_err	ft_get_philo_status(t_philo *philo, t_status *status);
 int64_t	ft_get_philo_last_meal(t_philo *philo);
 
 //set.c
-t_err	ft_set_philo_stop_sim(t_philo *philo);
+t_err	ft_set_philo_status(t_philo *philo, t_status status);
 t_err	ft_update_philo_last_meal(t_philo *philo);
 t_err	ft_update_philo_meals_ate(t_philo *philo);
 
 //monitoring.c
-t_err	ft_stop_all(t_philo *philos);
+t_err	ft_set_status_all(t_philo *philos, t_status status);
 bool	ft_is_dead(t_philo *philo);
 bool	ft_is_full(t_philo *philo);
 void	*ft_check_life(void *arg);

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:27:54 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 10:25:39 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/15 08:10:27 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,13 @@ t_err	ft_m_init_philos_meals_ate(t_philo *philos, int32_t num_philos)
 }
 
 /**
- * @brief Init mutex m_stop_sim in philos array.
+ * @brief Init mutex m_status in philos array.
  *
  * @param philos Philos array.
  * @param num_philos Number of philos.
  * @return t_err SUCCESS, ERR_MUTEX_INIT
  */
-t_err	ft_m_init_philos_stop_sim(t_philo *philos, int32_t num_philos)
+t_err	ft_m_init_philos_status(t_philo *philos, int32_t num_philos)
 {
 	int32_t	i;
 	bool	init_fail;
@@ -119,7 +119,7 @@ t_err	ft_m_init_philos_stop_sim(t_philo *philos, int32_t num_philos)
 	init_fail = false;
 	while (i < num_philos)
 	{
-		if (pthread_mutex_init(&philos[i].m_stop_sim, NULL) != 0)
+		if (pthread_mutex_init(&philos[i].m_status, NULL) != 0)
 		{
 			init_fail = true;
 			break ;
@@ -129,7 +129,7 @@ t_err	ft_m_init_philos_stop_sim(t_philo *philos, int32_t num_philos)
 	if (init_fail)
 	{
 		while (--i >= 0)
-			pthread_mutex_destroy(&philos[i].m_stop_sim);
+			pthread_mutex_destroy(&philos[i].m_status);
 		return (ERR_MUTEX_INIT);
 	}
 	return (SUCCESS);
@@ -148,7 +148,7 @@ t_err	ft_m_init_philos(t_philo *philos, int32_t num_philos)
 		ft_m_destroy_philo_last_meal(philos, num_philos);
 		return (err);
 	}
-	err = ft_m_init_philos_stop_sim(philos, num_philos);
+	err = ft_m_init_philos_status(philos, num_philos);
 	if (err != SUCCESS)
 	{
 		ft_m_destroy_philo_meals_ate(philos, num_philos);
