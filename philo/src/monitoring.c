@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:32:44 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 08:56:59 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/15 10:27:44 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	ft_is_dead(t_philo *philo)
 
 	ret = false;
 	pthread_mutex_lock(&philo->m_last_meal);
-	if (ft_timestamp_in_ms() - philo->last_meal >= philo->params->time_to_die)
+	if (ft_timestamp_in_ms() - philo->last_meal > philo->params->time_to_die)
 		ret = true;
 	pthread_mutex_unlock(&philo->m_last_meal);
 	if (ret)
