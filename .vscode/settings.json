@@ -8,6 +8,8 @@
 		"utils.h": "c",
 		"init.h": "c",
 		"teardown.h": "c",
-		"philo.h": "c"
+		"philo.h": "c",
+		"return_codes.h": "c",
+		"input.h": "c"
 	}
 }
