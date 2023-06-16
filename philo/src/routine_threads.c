@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_threads.c                                    :+:      :+:    :+:   */
+/*   routine_threads.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/11 09:11:08 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/13 12:28:36y gwolf            ###   ########.fr       */
+/*   Created: 2023/06/16 14:36:04 by gwolf             #+#    #+#             */
+/*   Updated: 2023/06/16 14:38:56 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_threads.h"
+#include "routine.h"
 
 t_err	ft_set_startup_time(t_philo *philos, t_params *params)
 {
@@ -44,7 +44,7 @@ t_err	ft_spin_threads(t_data *data, t_philo *philos, t_params *params)
 		}
 		i++;
 	}
-	ft_monitoring(philos, params->num_philos, data->meals);
+	ft_monitoring(philos, data->meals);
 	return (SUCCESS);
 }
 

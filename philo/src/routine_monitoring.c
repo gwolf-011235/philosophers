@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitoring.c                                       :+:      :+:    :+:   */
+/*   routine_monitoring.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:32:44 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 16:34:48 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/16 14:38:04 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,14 @@ bool	ft_is_full(t_philo *philo)
 	return (ret);
 }
 
-t_err	ft_dead_or_full(t_philo *philos, int32_t num_philos,
-							bool *alive, bool *hungry, bool meals)
+t_err	ft_dead_or_full(t_philo *philos, bool *alive, bool *hungry, bool meals)
 {
 	int32_t		i;
 	int32_t		philos_fed;
 
 	i = 0;
 	philos_fed = 0;
-	while (i < num_philos)
+	while (i < philos->params->num_philos)
 	{
 		if (ft_is_dead(&philos[i]) == true)
 		{
@@ -85,12 +84,12 @@ t_err	ft_dead_or_full(t_philo *philos, int32_t num_philos,
 			philos_fed++;
 		i++;
 	}
-	if (philos_fed == num_philos)
+	if (philos_fed == philos->params->num_philos)
 		*hungry = false;
 	return (SUCCESS);
 }
 
-t_err	ft_monitoring(t_philo *philos, int32_t num_philos, bool meals)
+t_err	ft_monitoring(t_philo *philos, bool meals)
 {
 	t_err	err;
 	bool	alive;
@@ -100,7 +99,7 @@ t_err	ft_monitoring(t_philo *philos, int32_t num_philos, bool meals)
 	hungry = true;
 	while (alive && hungry)
 	{
-		err = ft_dead_or_full(philos, num_philos, &alive, &hungry, meals);
+		err = ft_dead_or_full(philos, &alive, &hungry, meals);
 		if (err != SUCCESS)
 			return (err);
 	}

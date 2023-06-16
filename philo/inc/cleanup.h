@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_threads.h                                    :+:      :+:    :+:   */
+/*   cleanup.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/11 09:11:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 16:37:00 by gwolf            ###   ########.fr       */
+/*   Created: 2023/06/10 22:46:37 by gwolf             #+#    #+#             */
+/*   Updated: 2023/06/16 14:33:09 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_THREADS_H
-# define PHILO_THREADS_H
+#ifndef CLEANUP_H
+# define CLEANUP_H
+
+# include <stdlib.h>
 
 # include "philo_struct.h"
 # include "return_codes.h"
-# include "utils.h"
-# include "routine.h"
 
-t_err	ft_spin_threads(t_data *data, t_philo *philos, t_params *params);
-t_err	ft_join_threads(t_philo *philos, t_params *params);
-t_err	ft_stop_and_join(t_data *data, t_err err, int32_t num_philos);
+//cleanup.c
+t_err	ft_cleanup(t_data *data, t_err err, int32_t num_philos);
+
+//cleanup_mutex.c
+t_err	ft_m_destroy_forks_in_use(t_fork *forks, int32_t num_philos);
+t_err	ft_m_destroy_philo_last_meal(t_philo *philos, int32_t num_philos);
+t_err	ft_m_destroy_philo_meals_ate(t_philo *philos, int32_t num_philos);
+t_err	ft_m_destroy_philo_stop_sim(t_philo *philos, int32_t num_philos);
 
 #endif

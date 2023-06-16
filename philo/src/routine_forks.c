@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:27:29 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 17:28:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/16 14:35:40 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,3 @@ t_err	ft_drop_forks(t_philo *philo)
 	pthread_mutex_unlock(&philo->right_fork->m_in_use);
 	return (SUCCESS);
 }
-

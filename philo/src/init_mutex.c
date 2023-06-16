@@ -6,13 +6,11 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:27:54 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 08:10:27 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/16 10:41:42 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_struct.h"
-#include "return_codes.h"
-#include "teardown.h"
+#include "init.h"
 
 /**
  * @brief Init mutex m_in_use in forks array.

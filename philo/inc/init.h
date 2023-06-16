@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 22:23:41 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 08:10:27 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/16 10:41:52 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # include "philo_struct.h"
 # include "return_codes.h"
-# include "teardown.h"
+# include "cleanup.h"
 
 //init.c
 t_err	ft_malloc_arrays(t_philo **philos, t_fork **forks, int32_t num_philos);
