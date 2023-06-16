@@ -6,21 +6,31 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 00:29:45 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/16 10:40:41 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/16 15:31:26 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cleanup.h"
 
+/**
+ * @brief Deallocate and destroy mutexes.
+ *
+ * Depending on the setup stage of the programm calls different fts.
+ * POST_MUTEX_PHILO > ft_m_destroy_philo().
+ * POST_MUTEX_FORK > ft_m_destroy_forks_in_use().
+ * POST_MUTEX_DATA > destroy m_print mutex.
+ * POST_MALLOC > free philos and forks.
+ *
+ * @param data Struct containing simulation data.
+ * @param err Error Code
+ * @param num_philos Number of philos.
+ * @return t_err Received t_err or PANIC
+ */
 t_err	ft_cleanup(t_data *data, t_err err, int32_t num_philos)
 {
 	if (data->stage == POST_MUTEX_PHILO)
 	{
-		if (ft_m_destroy_philo_stop_sim(data->philos, num_philos) != SUCCESS)
-			return (ft_print_err_msg(PANIC));
-		if (ft_m_destroy_philo_meals_ate(data->philos, num_philos) != SUCCESS)
-			return (ft_print_err_msg(PANIC));
-		if (ft_m_destroy_philo_last_meal(data->philos, num_philos) != SUCCESS)
+		if (ft_m_destroy_philo(data->philos, num_philos) != SUCCESS)
 			return (ft_print_err_msg(PANIC));
 	}
 	if (data->stage >= POST_MUTEX_FORK)

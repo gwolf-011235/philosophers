@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 22:22:46 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 12:52:11 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/16 15:12:29 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ t_err	ft_malloc_arrays(t_philo **philos, t_fork **forks, int32_t num_philos)
 /**
  * @brief Init vars of every t_philo struct in philos array.
  *
- * Sets id, params, left_fork, right_fork.
+ * Sets id, params, left_fork, right_fork, stop_sim.
  * Does not set last_meal and status since already zero.
  *
  * @param philos Philos array.
  * @param forks Forks array.
  * @param params Pointer to params.
- * @return t_err SUCCESS, ERR_MUTEX_INIT, ERR_MUTEX_DESTROY
+ * @return t_err SUCCESS
  */
 t_err	ft_init_philos(t_philo *philos, t_data *data, t_params *params)
 {
@@ -70,6 +70,12 @@ t_err	ft_init_philos(t_philo *philos, t_data *data, t_params *params)
 
 /**
  * @brief Driver ft to init simulation.
+ *
+ * Sets the program to different stages.
+ * ft_malloc_arrays() for arrays.
+ * ft_m_init_forks_in_use() for forks.
+ * ft_init_philos() to set philos data.
+ * ft_m_init_philos() to set philos forks.
  *
  * @param philos Philos array.
  * @param forks Forks array.
