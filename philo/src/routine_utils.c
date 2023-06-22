@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:45:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/16 16:12:06 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/22 17:40:11 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_err	ft_get_philo_status(t_philo *philo, t_status *status)
  * @param status Status to set.
  * @return t_err SUCCESS
  */
+
 t_err	ft_set_philo_status(t_philo *philo, t_status status)
 {
 	pthread_mutex_lock(&philo->m_status);
