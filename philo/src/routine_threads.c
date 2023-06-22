@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:36:04 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/16 16:08:53 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/22 14:05:50 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_err	ft_set_startup_time(t_philo *philos, t_params *params)
 	i = 0;
 	while (i < params->num_philos)
 	{
-		philos[i].last_meal = ft_timestamp_in_ms();
+		philos[i].last_meal = params->start_time;
 		i++;
 	}
 	return (SUCCESS);
