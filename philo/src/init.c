@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 22:22:46 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/16 15:12:29 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/22 14:28:38 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_err	ft_init_philos(t_philo *philos, t_data *data, t_params *params)
  * @param params Pointer to params.
  * @return t_err SUCCESS, ERR_MALLOC, ERR_MUTEX_INIT
  */
-t_err	ft_setup_vars(t_data *data, t_params *params)
+t_err	ft_init_sim(t_data *data, t_params *params)
 {
 	t_err	err;
 

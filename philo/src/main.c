@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 15:32:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 16:38:05 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/22 14:28:38 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char *argv[])
 	err = ft_set_params(&params, argc, argv, &data.meals);
 	if (err != SUCCESS)
 		return (ft_print_err_msg(err));
-	err = ft_setup_vars(&data, &params);
+	err = ft_init_sim(&data, &params);
 	if (err != SUCCESS)
 		return (ft_cleanup(&data, err, params.num_philos));
 	err = ft_spin_threads(&data, data.philos, &params);
