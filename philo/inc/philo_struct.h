@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 11:16:49 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/22 14:29:05 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/22 17:34:24 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ typedef struct s_data {
 	t_fork			*forks;
 	t_stage			stage;
 	pthread_mutex_t	m_print;
-	bool			meals;
 	bool			stop_sim;
+	bool			meals;
 }	t_data;
 
 #endif
