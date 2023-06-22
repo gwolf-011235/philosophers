@@ -6,7 +6,7 @@
 #    By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/11 10:17:44 by gwolf             #+#    #+#              #
-#    Updated: 2023/06/16 10:44:20 by gwolf            ###   ########.fr        #
+#    Updated: 2023/06/22 14:23:59 by gwolf            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,9 @@ DEP_DIR := $(OBJ_DIR)/dep
 CC := cc
 CPPFLAGS = -I $(INC_DIR)
 CFLAGS = -Wall -Werror -Wextra -pthread -g
-DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
+DEPFLAGS = -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.Td
 COMPILE = $(CC) $(DEPFLAGS) $(CPPFLAGS) $(CFLAGS)
+POSTCOMPILE = @mv -f $(DEP_DIR)/$*.Td $(DEP_DIR)/$*.d && touch $@
 
 # targets
 NAME := philo
@@ -58,8 +59,7 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(OBJ))
 # dependencies
 DEPFILES :=$(SRC:%.c=$(DEP_DIR)/%.d)
 
-.PHONY: all, clean, fclean, re, obj, dep
-
+.PHONY: all
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -68,10 +68,12 @@ $(NAME): $(OBJS)
 	@printf "\n$(YELLOW)$(BOLD)compilation succesful$(RESET) [$(BLUE)philosophers$(RESET)]\n"
 	@printf "$(GREEN)$(BOLD)$(NAME)$(RESET) created!$(RESET)\n\n"
 
+.PHONY: debug
 debug: CFLAGS += -fsanitize=address
 debug: fclean $(NAME)
 	@printf "DEBUG: Compiled with $(YELLOW)$(BOLD)fsanitize=address$(RESET)\n\n"
 
+.PHONY: tebug
 tebug: CFLAGS += -fsanitize=thread
 tebug: fclean $(NAME)
 	@printf "DEBUG: Compiled with $(YELLOW)$(BOLD)fsanitize=thread$(RESET)\n\n"
@@ -79,6 +81,7 @@ tebug: fclean $(NAME)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(DEP_DIR)/%.d message | $(DEP_DIR)
 	$(COMPILE) -c $< -o $@
+	$(POSTCOMPILE)
 
 .INTERMEDIATE: message
 message:
@@ -90,15 +93,18 @@ $(DEP_DIR):
 
 $(DEPFILES):
 
+.PHONY: clean
 clean:
 	@printf "\n$(YELLOW)$(BOLD)clean$(RESET) [$(BLUE)philosophers$(RESET)]\n"
 	@rm -rf $(OBJ_DIR)
 	@printf "$(RED)removed subdir $(OBJ_DIR)$(RESET)\n"
 
+.PHONY: fclean
 fclean: clean
 	@rm -rf $(NAME)
 	@printf "$(RED)removed binary $(NAME)$(RESET)\n"
 
+.PHONY: re
 re: fclean all
 
 include $(wildcard $(DEPFILES))
