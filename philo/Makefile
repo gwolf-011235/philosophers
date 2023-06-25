@@ -6,7 +6,7 @@
 #    By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/11 10:17:44 by gwolf             #+#    #+#              #
-#    Updated: 2023/06/15 17:33:20 by gwolf            ###   ########.fr        #
+#    Updated: 2023/06/25 10:18:51 by gwolf            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@printf "\n$(YELLOW)$(BOLD)link binary$(RESET) [$(BLUE)philosophers$(RESET)]\n"
 	$(COMPILE) $(OBJS) -o $@
-	@printf "\n$(YELLOW)$(BOLD)compilation succesful$(RESET) [$(BLUE)philosophers$(RESET)]\n"
+	@printf "\n$(YELLOW)$(BOLD)compilation successful$(RESET) [$(BLUE)philosophers$(RESET)]\n"
 	@printf "$(GREEN)$(BOLD)$(NAME)$(RESET) created!$(RESET)\n\n"
 
 debug: CFLAGS += -fsanitize=address
