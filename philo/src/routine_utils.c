@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:45:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 17:29:30 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/22 17:40:11 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 /**
  * @brief Prints log of state change of a philosopher. Mutex protected.
+ *
+ * The first philo who prints DIED also sets stop_sim to true.
+ * If stop_sim is true a philo can't print DIED anymore.
  *
  * @param philo Philo who prints.
  * @param index	Type of msg: FORK, EAT, SLEEP, THINK, DIED
@@ -40,6 +43,13 @@ void	ft_print(t_philo *philo, t_msg index)
 	pthread_mutex_unlock(philo->m_print);
 }
 
+/**
+ * @brief Get philo status. Mutex protected
+ *
+ * @param philo A philo
+ * @param status Pointer where to save.
+ * @return t_err SUCCESS
+ */
 t_err	ft_get_philo_status(t_philo *philo, t_status *status)
 {
 	pthread_mutex_lock(&philo->m_status);
@@ -47,6 +57,13 @@ t_err	ft_get_philo_status(t_philo *philo, t_status *status)
 	pthread_mutex_unlock(&philo->m_status);
 	return (SUCCESS);
 }
+/**
+ * @brief Set philo status to status. Mutex protected.
+ *
+ * @param philo A philo
+ * @param status Status to set.
+ * @return t_err SUCCESS
+ */
 
 t_err	ft_set_philo_status(t_philo *philo, t_status status)
 {
@@ -56,6 +73,14 @@ t_err	ft_set_philo_status(t_philo *philo, t_status status)
 	return (SUCCESS);
 }
 
+/**
+ * @brief Update last_meal of philo. Mutex protected.
+ *
+ * Calls ft_timestamp_in_ms().
+ *
+ * @param philo A philo
+ * @return t_err SUCCESS
+ */
 t_err	ft_update_philo_last_meal(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->m_last_meal);
@@ -64,6 +89,12 @@ t_err	ft_update_philo_last_meal(t_philo *philo)
 	return (SUCCESS);
 }
 
+/**
+ * @brief Increase meals_ate by one. Mutex protected.
+ *
+ * @param philo A philo
+ * @return t_err SUCCESS
+ */
 t_err	ft_update_philo_meals_ate(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->m_meals_ate);

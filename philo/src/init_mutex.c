@@ -6,13 +6,11 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:27:54 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/15 08:10:27 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/16 15:15:59 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_struct.h"
-#include "return_codes.h"
-#include "teardown.h"
+#include "init.h"
 
 /**
  * @brief Init mutex m_in_use in forks array.
@@ -78,6 +76,13 @@ t_err	ft_m_init_philos_last_meal(t_philo *philos, int32_t num_philos)
 	return (SUCCESS);
 }
 
+/**
+ * @brief Init mutex m_meals_ate in philos array.
+ *
+ * @param philos Philos array.
+ * @param num_philos Numer of philos.
+ * @return t_err SUCCESS, ERR_MUTEX_INIT
+ */
 t_err	ft_m_init_philos_meals_ate(t_philo *philos, int32_t num_philos)
 {
 	int32_t	i;
@@ -135,6 +140,17 @@ t_err	ft_m_init_philos_status(t_philo *philos, int32_t num_philos)
 	return (SUCCESS);
 }
 
+/**
+ * @brief Driver ft to call several mutex inits for philos.
+ *
+ * ft_m_init_philos_last_meal().
+ * ft_m_init_philos_meals_ate().
+ * ft_m_init_philos_status().
+ *
+ * @param philos Philos array.
+ * @param num_philos Number of philos.
+ * @return t_err SUCCESS, ERR_MUTEX_INIT
+ */
 t_err	ft_m_init_philos(t_philo *philos, int32_t num_philos)
 {
 	t_err	err;
