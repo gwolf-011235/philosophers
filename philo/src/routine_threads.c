@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:36:04 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/27 07:58:37 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 08:06:35 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,12 @@ t_err	ft_set_startup_time(t_philo *philos, t_params *params)
  * @param params Pointer to struct params.
  * @return t_err SUCCESS, ERR_THREAD_CREATE
  */
-t_err	ft_spin_threads(t_data *data, t_philo *philos, t_params *params)
+t_err	ft_spin_threads(t_philo *philos, int32_t num_philos)
 {
 	int32_t		i;
 
-	ft_set_startup_time(philos, params);
 	i = 0;
-	while (i < params->num_philos)
+	while (i < num_philos)
 	{
 		if (pthread_create(&philos[i].thread_id, NULL,
 				ft_philo_life, &philos[i]) != 0)
@@ -64,7 +63,6 @@ t_err	ft_spin_threads(t_data *data, t_philo *philos, t_params *params)
 		}
 		i++;
 	}
-	ft_monitoring(philos, data->meals);
 	return (SUCCESS);
 }
 
@@ -75,12 +73,12 @@ t_err	ft_spin_threads(t_data *data, t_philo *philos, t_params *params)
  * @param params Struct params.
  * @return t_err SUCCESS
  */
-t_err	ft_join_threads(t_philo *philos, t_params *params)
+t_err	ft_join_threads(t_philo *philos, int32_t num_philos)
 {
 	int32_t	i;
 
 	i = 0;
-	while (i < params->num_philos)
+	while (i < num_philos)
 	{
 		pthread_join(philos[i].thread_id, NULL);
 		i++;
@@ -117,13 +115,13 @@ t_err	ft_start_simulation(t_data *data, t_philo *philos, t_params *params)
 	err = ft_set_startup_time(philos, params);
 	if (err != SUCCESS)
 		return (err);
-	err = ft_spin_threads(data, philos, params);
+	err = ft_spin_threads(philos, params->num_philos);
 	if (err != SUCCESS)
 		return (err);
 	err = ft_monitoring(philos, data->meals);
 	if (err != SUCCESS)
 		return (err);
-	err = ft_join_threads(philos, params);
+	err = ft_join_threads(philos, params->num_philos);
 	if (err != SUCCESS)
 		return (err);
 	return (SUCCESS);

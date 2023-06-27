@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 15:32:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/27 07:39:34 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 08:01:32 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ int	main(int argc, char *argv[])
 	err = ft_init_sim(&data, &params);
 	if (err != SUCCESS)
 		return (ft_cleanup(&data, err, params.num_philos));
-	err = ft_spin_threads(&data, data.philos, &params);
-	if (err != SUCCESS)
-		return (ft_cleanup(&data, err, params.num_philos));
-	err = ft_join_threads(data.philos, &params);
+	err = ft_start_simulation(&data, data.philos, &params);
 	if (err != SUCCESS)
 		return (ft_cleanup(&data, err, params.num_philos));
 	if (data.philos->status == DEAD)

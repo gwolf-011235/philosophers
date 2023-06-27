@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:33:01 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/27 07:57:20 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 08:04:51 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ t_err	ft_dead_or_full(t_philo *philos, bool *alive, bool *hungry, bool meals);
 t_err	ft_monitoring(t_philo *philos, bool meals);
 
 //routine_threads.c
-t_err	ft_spin_threads(t_data *data, t_philo *philos, t_params *params);
-t_err	ft_join_threads(t_philo *philos, t_params *params);
+t_err	ft_start_simulation(t_data *data, t_philo *philos, t_params *params);
+t_err	ft_spin_threads(t_philo *philos, int32_t num_philos);
+t_err	ft_join_threads(t_philo *philos, int32_t num_philos);
 t_err	ft_stop_and_join(t_philo *philos, int32_t num_philos);
 
 //routine_utils.c
