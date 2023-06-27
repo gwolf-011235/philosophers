@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 22:22:46 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/27 09:52:22 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 10:00:56 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_err	ft_malloc_arrays(t_philo **philos, t_fork **forks, int32_t num_philos)
 /**
  * @brief Init vars of every t_philo struct in philos array.
  *
- * Sets id, params, left_fork, right_fork, stop_sim.
+ * Sets id, params, left_fork, right_fork, stop_print.
  * Does not set last_meal and status since already zero.
  *
  * @param philos Philos array.
@@ -62,7 +62,7 @@ t_err	ft_init_philos(t_philo *philos, t_data *data, t_params *params)
 			philos[i].right_fork = &data->forks[0];
 		else
 			philos[i].right_fork = &data->forks[i + 1];
-		philos[i].stop_sim = &data->stop_sim;
+		philos[i].stop_print = &data->stop_print;
 		i++;
 	}
 	return (SUCCESS);

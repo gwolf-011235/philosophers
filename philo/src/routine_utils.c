@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:45:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/22 17:40:11 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 10:00:56 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /**
  * @brief Prints log of state change of a philosopher. Mutex protected.
  *
- * The first philo who prints DIED also sets stop_sim to true.
- * If stop_sim is true a philo can't print DIED anymore.
+ * The first philo who prints DIED also sets stop_print to true.
+ * If stop_print is true a philo can't print DIED anymore.
  *
  * @param philo Philo who prints.
  * @param index	Type of msg: FORK, EAT, SLEEP, THINK, DIED
@@ -33,13 +33,13 @@ void	ft_print(t_philo *philo, t_msg index)
 	int64_t				curr_timestamp;
 
 	pthread_mutex_lock(philo->m_print);
-	if (!*philo->stop_sim)
+	if (!*philo->stop_print)
 	{
 		curr_timestamp = ft_timestamp_in_ms() - philo->params->start_time;
 		printf("%ld\t%d %s\n", curr_timestamp, philo->id, msg[index]);
 	}
 	if (index == DIED)
-		*philo->stop_sim = true;
+		*philo->stop_print = true;
 	pthread_mutex_unlock(philo->m_print);
 }
 
