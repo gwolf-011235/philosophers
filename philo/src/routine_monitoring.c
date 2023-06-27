@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:32:44 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/27 07:42:04 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 10:08:01 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ t_err	ft_monitoring(t_philo *philos, bool meals)
 
 	alive = true;
 	hungry = true;
+	if (philos->params->num_philos == 1)
+		return (SUCCESS);
 	while (alive && hungry)
 	{
 		err = ft_dead_or_full(philos, &alive, &hungry, meals);
