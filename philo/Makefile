@@ -6,7 +6,7 @@
 #    By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/11 10:17:44 by gwolf             #+#    #+#              #
-#    Updated: 2023/06/25 10:20:53 by gwolf            ###   ########.fr        #
+#    Updated: 2023/06/27 09:12:42 by gwolf            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,13 +41,13 @@ SRC :=	cleanup_mutex.c \
 		cleanup.c \
 		error_msg.c \
 		init_mutex.c \
-		init.c \
-		input.c \
+		init_sim.c \
+		handle_input.c \
 		main.c \
 		routine_forks.c \
 		routine_monitoring.c \
 		routine_philo.c \
-		routine_threads.c \
+		start_sim.c \
 		routine_utils.c \
 		utils.c
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))

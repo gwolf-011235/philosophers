@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine_threads.c                                  :+:      :+:    :+:   */
+/*   start_sim.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:36:04 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/27 08:06:35 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 09:14:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,20 @@ t_err	ft_stop_and_join(t_philo *philos, int32_t num_philos)
 	return (ERR_THREAD_CREATE);
 }
 
-t_err	ft_start_simulation(t_data *data, t_philo *philos, t_params *params)
+/**
+ * @brief Start simulation by setting up time, threads and monitoring.
+ *
+ * For time ft_set_startup_time().
+ * To thread ft_spin_threads().
+ * To monitor ft_monitoring().
+ * To join ft_join_threads().
+ *
+ * @param philos
+ * @param params
+ * @param meals
+ * @return t_err
+ */
+t_err	ft_start_sim(t_philo *philos, t_params *params, bool *meals)
 {
 	t_err	err;
 
@@ -118,7 +131,7 @@ t_err	ft_start_simulation(t_data *data, t_philo *philos, t_params *params)
 	err = ft_spin_threads(philos, params->num_philos);
 	if (err != SUCCESS)
 		return (err);
-	err = ft_monitoring(philos, data->meals);
+	err = ft_monitoring(philos, meals);
 	if (err != SUCCESS)
 		return (err);
 	err = ft_join_threads(philos, params->num_philos);
