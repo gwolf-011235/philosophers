@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 18:08:56 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/16 15:09:39 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 08:13:59 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,20 @@ t_err	ft_set_params(t_params *params, int argc, char **argv, bool *meals)
 		*meals = true;
 	}
 	if (params->num_philos == 0
-		|| (argc == 6 && params->times_to_eat == 0))
+		|| (*meals && params->times_to_eat == 0))
 		return (ERR_ISZERO);
+	return (SUCCESS);
+}
+
+t_err	ft_handle_input(t_params *params, int argc, char **argv, bool *meals)
+{
+	t_err	err;
+
+	err = ft_check_args(argc, argv);
+	if (err != SUCCESS)
+		return (err);
+	err = ft_set_params(params, argc, argv, meals);
+	if (err != SUCCESS)
+		return (err);
 	return (SUCCESS);
 }

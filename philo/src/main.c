@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 15:32:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/27 08:01:32 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 08:15:36 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ int	main(int argc, char *argv[])
 	t_err			err;
 
 	data.stage = INIT;
-	err = ft_check_args(argc, argv);
-	if (err != SUCCESS)
-		return (ft_print_err_msg(err));
-	err = ft_set_params(&params, argc, argv, &data.meals);
+	err = ft_handle_input(&params, argc, argv, &data.meals);
 	if (err != SUCCESS)
 		return (ft_print_err_msg(err));
 	err = ft_init_sim(&data, &params);
