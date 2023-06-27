@@ -11,6 +11,7 @@
 		"philo.h": "c",
 		"return_codes.h": "c",
 		"input.h": "c",
-		"cleanup.h": "c"
+		"cleanup.h": "c",
+		"start_sim.h": "c"
 	}
 }

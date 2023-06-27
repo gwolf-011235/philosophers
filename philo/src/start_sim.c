@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:36:04 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/27 09:56:48 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 10:21:58 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ t_err	ft_stop_and_join(t_philo *philos, int32_t num_philos)
  * @param meals
  * @return t_err
  */
-t_err	ft_start_sim(t_philo *philos, t_params *params, bool *meals)
+t_err	ft_start_sim(t_philo *philos, t_params *params, bool meals)
 {
 	t_err	err;
 
