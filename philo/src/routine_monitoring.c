@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 11:32:44 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/16 15:46:59 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 07:42:04 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ t_err	ft_set_status_all(t_philo *philos, t_status status)
 /**
  * @brief Calc if time_to_die is over. If yes set status to DEAD.
  *
- * Checks if status is smaller then DEAD. So if the philo is at FULL_STOP
- * he is immune to dying.
- *
  * @param philo A philo
  * @return true Philo is dead.
  * @return false Philo is alive.
@@ -65,7 +62,7 @@ bool	ft_is_dead(t_philo *philo)
 }
 
 /**
- * @brief Check if philo has eaten enough. If yes set status to FULL.
+ * @brief Check if philo has eaten enough. If yes return true.
  *
  * @param philo A philo
  * @return true Philo is full.
@@ -80,13 +77,6 @@ bool	ft_is_full(t_philo *philo)
 	if (philo->meals_ate >= philo->params->times_to_eat)
 		ret = true;
 	pthread_mutex_unlock(&philo->m_meals_ate);
-	if (ret)
-	{
-		pthread_mutex_lock(&philo->m_status);
-		if (philo->status == ACTIVE)
-			philo->status = FULL;
-		pthread_mutex_unlock(&philo->m_status);
-	}
 	return (ret);
 }
 
@@ -133,7 +123,7 @@ t_err	ft_dead_or_full(t_philo *philos, bool *alive, bool *hungry, bool meals)
  * Sets alive and hungry to true.
  * Then loops calling ft_dead_or_full() until it breaks out.
  * Depending of the set bool it either sets the status of every philo
- * to DEAD or FULL_STOP.
+ * to DEAD or FULL.
  *
  * @param philos Array of philos
  * @param meals If true philos are checked if full.
@@ -156,6 +146,6 @@ t_err	ft_monitoring(t_philo *philos, bool meals)
 	if (!alive)
 		ft_set_status_all(philos, DEAD);
 	if (!hungry)
-		ft_set_status_all(philos, FULL_STOP);
+		ft_set_status_all(philos, FULL);
 	return (SUCCESS);
 }

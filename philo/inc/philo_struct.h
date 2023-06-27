@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 11:16:49 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/22 17:34:24 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 07:39:34 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ typedef struct s_fork {
 
 typedef enum e_status {
 	ACTIVE = 0,
-	FULL,
 	DEAD,
-	FULL_STOP
+	FULL
 }	t_status;
 
 typedef struct s_philo {
@@ -58,8 +57,8 @@ typedef struct s_philo {
 	pthread_mutex_t	m_meals_ate;
 	t_status		status;
 	pthread_mutex_t	m_status;
-	pthread_mutex_t	*m_print;
 	bool			*stop_sim;
+	pthread_mutex_t	*m_print;
 }	t_philo;
 
 typedef struct s_data {

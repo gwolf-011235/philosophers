@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 15:32:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/22 14:28:38 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 07:39:34 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char *argv[])
 		return (ft_cleanup(&data, err, params.num_philos));
 	if (data.philos->status == DEAD)
 		printf("💀 A Philosopher died\n");
-	if (data.philos->status == FULL_STOP)
+	if (data.philos->status == FULL)
 		printf("🫶  Every Philosopher is full ✨\n");
 	ft_cleanup(&data, SUCCESS, params.num_philos);
 }

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 09:32:19 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/16 16:01:19 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 07:42:55 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ void	ft_single_philo(t_philo *philo)
  * @brief Simulates the life of a philo.
  *
  * Handle one philo with ft_single_philo().
- * Repeat until a function detects DEAD or FULL_STOP:
- * ft_eat(), ft_sleep(), ft_think.
+ * Repeat until a function detects DEAD or FULL:
+ * ft_eat(), ft_sleep(), ft_think().
  * @param arg
  * @return void*
  */
