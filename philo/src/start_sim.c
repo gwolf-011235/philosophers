@@ -6,11 +6,11 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:36:04 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/27 09:14:28 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 09:56:48 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "routine.h"
+#include "start_sim.h"
 
 /**
  * @brief Set start timer for simulation and philos
