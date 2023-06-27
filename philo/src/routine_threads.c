@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:36:04 by gwolf             #+#    #+#             */
-/*   Updated: 2023/06/22 14:05:50 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/06/27 07:58:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_err	ft_spin_threads(t_data *data, t_philo *philos, t_params *params)
 				ft_philo_life, &philos[i]) != 0)
 		{
 			printf("🔥 Could not create philo thread with ID %d\n", i);
-			return (ft_stop_and_join(data, i));
+			return (ft_stop_and_join(philos, i));
 		}
 		i++;
 	}
@@ -98,14 +98,33 @@ t_err	ft_join_threads(t_philo *philos, t_params *params)
  * @param num_philos Number of philos.
  * @return t_err ERR_THREAD_CREATE
  */
-t_err	ft_stop_and_join(t_data *data, int32_t num_philos)
+t_err	ft_stop_and_join(t_philo *philos, int32_t num_philos)
 {
-	ft_set_status_all(data->philos, DEAD);
+	ft_set_status_all(philos, DEAD);
 	num_philos--;
 	while (num_philos >= 0)
 	{
-		pthread_join(data->philos[num_philos].thread_id, NULL);
+		pthread_join(philos[num_philos].thread_id, NULL);
 		num_philos--;
 	}
 	return (ERR_THREAD_CREATE);
+}
+
+t_err	ft_start_simulation(t_data *data, t_philo *philos, t_params *params)
+{
+	t_err	err;
+
+	err = ft_set_startup_time(philos, params);
+	if (err != SUCCESS)
+		return (err);
+	err = ft_spin_threads(data, philos, params);
+	if (err != SUCCESS)
+		return (err);
+	err = ft_monitoring(philos, data->meals);
+	if (err != SUCCESS)
+		return (err);
+	err = ft_join_threads(philos, params);
+	if (err != SUCCESS)
+		return (err);
+	return (SUCCESS);
 }
